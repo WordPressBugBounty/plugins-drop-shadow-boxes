@@ -3,17 +3,16 @@
 Plugin Name: Drop Shadow Boxes
 Plugin URI: http://www.stevenhenty.com/products/wordpress-plugins/drop-shadow-boxes/
 Description: Drop Shadow Boxes provides an easy way to highlight important content on your posts and pages. Includes a shortcode builder with a preview so you can test your box before adding it.
-Version: 1.7.14
+Version: 1.7.15
 Author: Steven Henty
 Contributors: stevehenty
-Donate link: http://www.stevenhenty.com/products/wordpress-plugins/donate/
-Author URI: http://www.stevenhenty.com
+Author URI: https://www.stevenhenty.com
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: drop-shadow-boxes
 
 ------------------------------------------------------------------------
-Copyright 2012-2023 Steven Henty
+Copyright 2012-2024 Steven Henty
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -148,7 +147,11 @@ if ( ! class_exists( 'DropShadowBoxes' ) ) {
 
 
 		public static function dropshadowboxes_ajax_get_preview() {
-			// TO DO - check ajax referrer
+
+            if ( ! current_user_can( 'edit_posts' ) ) {
+                echo - 1;
+                die();
+            }
 			$shortcode = sanitize_text_field( $_POST['shortcode'] );
 
 			$outputarray = array();
@@ -468,47 +471,47 @@ if ( ! class_exists( 'DropShadowBoxes' ) ) {
 				<div id="dropshadowbox_shortcode_builder_container" class="wrap">
 
 					<div style="padding:15px 15px 0 15px;">
-						<h3 style="color:#5A5A5A!important; font-family:Georgia,Times New Roman,Times,serif!important; font-size:1.8em!important; font-weight:normal!important;margin-top:0"><?php _e( 'Insert a Drop-Shadow Box', 'drop-shadow-boxes' ); ?></h3>
+						<h3 style="color:#5A5A5A!important; font-family:Georgia,Times New Roman,Times,serif!important; font-size:1.8em!important; font-weight:normal!important;margin-top:0"><?php esc_html_e( 'Insert a Drop-Shadow Box', 'drop-shadow-boxes' ); ?></h3>
 								<span>
-									<?php _e( 'Select the options below for your drop-shadow box.', 'drop-shadow-boxes' ); ?>
+									<?php esc_html_e( 'Select the options below for your drop-shadow box.', 'drop-shadow-boxes' ); ?>
 								</span>
 					</div>
-					<div style="padding:15px 15px 0 15px;"><?php _e( 'Effect:', 'drop-shadow-boxes' ); ?>
+					<div style="padding:15px 15px 0 15px;"><?php esc_html_e( 'Effect:', 'drop-shadow-boxes' ); ?>
 						<select id="box_effect">
-							<option value="lifted-both"><?php _e( 'Lifted (Both)', 'drop-shadow-boxes' ); ?> </option>
+							<option value="lifted-both"><?php esc_html_e( 'Lifted (Both)', 'drop-shadow-boxes' ); ?> </option>
 							<option
-								value="lifted-bottom-left"><?php _e( 'Lifted (Left)', 'drop-shadow-boxes' ); ?> </option>
+								value="lifted-bottom-left"><?php esc_html_e( 'Lifted (Left)', 'drop-shadow-boxes' ); ?> </option>
 							<option
-								value="lifted-bottom-right"><?php _e( 'Lifted (Right)', 'drop-shadow-boxes' ); ?> </option>
+								value="lifted-bottom-right"><?php esc_html_e( 'Lifted (Right)', 'drop-shadow-boxes' ); ?> </option>
 
-							<option value="curled"><?php _e( 'Curled', 'drop-shadow-boxes' ); ?> </option>
+							<option value="curled"><?php esc_html_e( 'Curled', 'drop-shadow-boxes' ); ?> </option>
 							<option
-								value="perspective-left"><?php _e( 'Perspective (Left)', 'drop-shadow-boxes' ); ?> </option>
+								value="perspective-left"><?php esc_html_e( 'Perspective (Left)', 'drop-shadow-boxes' ); ?> </option>
 							<option
-								value="perspective-right"><?php _e( 'Perspective (Right)', 'drop-shadow-boxes' ); ?> </option>
-							<option value="raised"><?php _e( 'Raised', 'drop-shadow-boxes' ); ?> </option>
+								value="perspective-right"><?php esc_html_e( 'Perspective (Right)', 'drop-shadow-boxes' ); ?> </option>
+							<option value="raised"><?php esc_html_e( 'Raised', 'drop-shadow-boxes' ); ?> </option>
 							<option
-								value="vertical-curve-left"><?php _e( 'Vertical Curve (Left)', 'drop-shadow-boxes' ); ?> </option>
+								value="vertical-curve-left"><?php esc_html_e( 'Vertical Curve (Left)', 'drop-shadow-boxes' ); ?> </option>
 							<option
-								value="vertical-curve-both"><?php _e( 'Vertical Curve (Both)', 'drop-shadow-boxes' ); ?> </option>
+								value="vertical-curve-both"><?php esc_html_e( 'Vertical Curve (Both)', 'drop-shadow-boxes' ); ?> </option>
 							<option
-								value="horizontal-curve-bottom"><?php _e( 'Horizontal Curve (Bottom)', 'drop-shadow-boxes' ); ?> </option>
+								value="horizontal-curve-bottom"><?php esc_html_e( 'Horizontal Curve (Bottom)', 'drop-shadow-boxes' ); ?> </option>
 							<option
-								value="horizontal-curve-both"><?php _e( 'Horizontal Curve (Both)', 'drop-shadow-boxes' ); ?> </option>
+								value="horizontal-curve-both"><?php esc_html_e( 'Horizontal Curve (Both)', 'drop-shadow-boxes' ); ?> </option>
 						</select>
 
-						<?php _e( 'Background:', 'drop-shadow-boxes' ); ?>
+						<?php esc_html_e( 'Background:', 'drop-shadow-boxes' ); ?>
 						<input id="box_background_color" value="#ffffff" class="dropshadowboxes-color-input" type="text"
 						       onclick="DSB_open_color_picker('box_background_color')"/>
 
 						<div class="dropshadowboxes-color-picker" rel="box_background_color"></div>
 
-						<?php _e( 'Alignment:', 'drop-shadow-boxes' ); ?>
+						<?php esc_html_e( 'Alignment:', 'drop-shadow-boxes' ); ?>
 						<select id="box_alignment">
-							<option value="none"><?php _e( 'None', 'drop-shadow-boxes' ); ?> </option>
-							<option value="left"><?php _e( 'Left', 'drop-shadow-boxes' ); ?> </option>
-							<option value="right"><?php _e( 'Right', 'drop-shadow-boxes' ); ?> </option>
-							<option value="center"><?php _e( 'Center', 'drop-shadow-boxes' ); ?> </option>
+							<option value="none"><?php esc_html_e( 'None', 'drop-shadow-boxes' ); ?> </option>
+							<option value="left"><?php esc_html_e( 'Left', 'drop-shadow-boxes' ); ?> </option>
+							<option value="right"><?php esc_html_e( 'Right', 'drop-shadow-boxes' ); ?> </option>
+							<option value="center"><?php esc_html_e( 'Center', 'drop-shadow-boxes' ); ?> </option>
 						</select>
 
 
@@ -516,17 +519,17 @@ if ( ! class_exists( 'DropShadowBoxes' ) ) {
 
 
 					<div style="padding:15px 15px 0 15px;">
-						<?php _e( 'Height:', 'drop-shadow-boxes' ); ?>
+						<?php esc_html_e( 'Height:', 'drop-shadow-boxes' ); ?>
 						<input id="box_height" value="auto" class="small-text" type="text"/>
 
-						<?php _e( 'Width:', 'drop-shadow-boxes' ); ?>
+						<?php esc_html_e( 'Width:', 'drop-shadow-boxes' ); ?>
 						<input id="box_width" value="auto" class="small-text" type="text"/>
 						<select id="box_width_units">
-							<option value="px"><?php _e( 'pixels', 'drop-shadow-boxes' ); ?> </option>
-							<option value="%"><?php _e( '%', 'drop-shadow-boxes' ); ?> </option>
+							<option value="px"><?php esc_html_e( 'pixels', 'drop-shadow-boxes' ); ?> </option>
+							<option value="%"><?php esc_html_e( '%', 'drop-shadow-boxes' ); ?> </option>
 						</select>
 
-						<?php _e( 'Border (pixels):', 'drop-shadow-boxes' ); ?><input id="border_width" value="1"
+						<?php esc_html_e( 'Border (pixels):', 'drop-shadow-boxes' ); ?><input id="border_width" value="1"
 						                                                              class="small-text" type="text"/>
 						<input id="border_color" value="#dddddd" class="dropshadowboxes-color-input" type="text"
 						       onclick="DSB_open_color_picker('border_color')"/>
@@ -536,33 +539,33 @@ if ( ! class_exists( 'DropShadowBoxes' ) ) {
 
 					<div style="padding:15px 15px 0 15px;">
 						<input type="checkbox" id="rounded_corners" checked='checked'/> <label
-							for="rounded_corners"><?php _e( 'Rounded corners', 'drop-shadow-boxes' ); ?></label> &nbsp;&nbsp;&nbsp;
+							for="rounded_corners"><?php esc_html_e( 'Rounded corners', 'drop-shadow-boxes' ); ?></label> &nbsp;&nbsp;&nbsp;
 						<input type="checkbox" id="inside_shadow" checked='checked'/> <label
-							for="inside_shadow"><?php _e( 'Inside shadow', 'drop-shadow-boxes' ); ?></label> &nbsp;&nbsp;&nbsp;
+							for="inside_shadow"><?php esc_html_e( 'Inside shadow', 'drop-shadow-boxes' ); ?></label> &nbsp;&nbsp;&nbsp;
 						<input type="checkbox" id="outside_shadow" checked='checked'/> <label
-							for="outside_shadow"><?php _e( 'Outside shadow', 'drop-shadow-boxes' ); ?></label> &nbsp;&nbsp;&nbsp;
+							for="outside_shadow"><?php esc_html_e( 'Outside shadow', 'drop-shadow-boxes' ); ?></label> &nbsp;&nbsp;&nbsp;
 
 					</div>
 
 					<div style="padding:15px 15px 0 15px;">
                         <textarea style="width:100%"
-                                  id="box_content"><?php _e( 'Enter your content here.', 'drop-shadow-boxes' ); ?></textarea>
+                                  id="box_content"><?php esc_html_e( 'Enter your content here.', 'drop-shadow-boxes' ); ?></textarea>
 						&nbsp;&nbsp;&nbsp;
 
 					</div>
 					<div style="padding:0px 15px 15px 15px;">
 						<input type="button" class="button-primary"
-						       value="<?php _e( 'Refresh Preview', 'drop-shadow-boxes' ); ?>"
+						       value="<?php esc_attr_e( 'Refresh Preview', 'drop-shadow-boxes' ); ?>"
 						       onclick="RefreshPreview();"/>&nbsp;&nbsp;&nbsp;
 						<input type="button" class="button-primary"
-						       value="<?php _e( 'Insert Box', 'drop-shadow-boxes' ); ?>"
+						       value="<?php esc_attr_e( 'Insert Box', 'drop-shadow-boxes' ); ?>"
 						       onclick="SendDropShadowShortCodeToEditor();"/>&nbsp;&nbsp;&nbsp;
 						<a class="button" style="color:#bbb;" href="#"
-						   onclick="tb_remove(); return false;"><?php _e( 'Cancel', 'drop-shadow-boxes' ); ?></a>
+						   onclick="tb_remove(); return false;"><?php esc_html_e( 'Cancel', 'drop-shadow-boxes' ); ?></a>
 					</div>
 					<fieldset style="border: 4px dashed #DDDDDD;width:90%;margin:0 15px 0 15px;">
 						<legend
-							style="color:#CCC;font-weight:bold;font-family: Helvetica, Arial;font-size: 1.8em"><?php _e( 'Preview', 'drop-shadow-boxes' ); ?></legend>
+							style="color:#CCC;font-weight:bold;font-family: Helvetica, Arial;font-size: 1.8em"><?php esc_html_e( 'Preview', 'drop-shadow-boxes' ); ?></legend>
 						<div id="dropshadowboxes_preview_box" style="height: 200px;padding:15px;overflow:auto;">
 							<div id="dropshadowboxes_preview_container" style="width:95%;">
 								Tellus vestibulum tempus tellus ullamcorper amet egestas varius sollicitudin ut tellus

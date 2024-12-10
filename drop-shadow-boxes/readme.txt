@@ -1,10 +1,10 @@
 === Drop Shadow Boxes ===
 Contributors: stevehenty
 Donate link: http://www.stevenhenty.com/products/wordpress-plugins/donate
-Tags: block, gutenberg, drop shadow,box shadow,perspective,raised,curl,lifted
+Tags: shadows,drop shadow,box shadow
 Requires at least: 3.0
-Tested up to: 6.4.1
-Stable tag: 1.7.14
+Tested up to: 6.7.1
+Stable tag: 1.7.15
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -181,6 +181,9 @@ http://www.stevenhenty.com/products/wordpress-plugins/drop-shadow-boxes/examples
 4. Example boxes
 
 == ChangeLog ==
+
+= 1.7.15 =
+- Added security enhancements.
 
 = 1.7.14 =
 - Added security enhancements.

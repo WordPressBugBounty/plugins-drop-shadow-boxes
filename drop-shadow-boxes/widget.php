@@ -13,11 +13,11 @@ if(!class_exists("DropShadowBoxesWidget")){
 
 		function __construct() {
 
-			$description = esc_html__( 'Drop Shadow Box Widget', 'gravityforms' );
+			$description = esc_html__( 'Drop Shadow Box Widget', 'drop-shadow-boxes' );
 
 			WP_Widget::__construct(
 				'dropshadowboxes_widget',
-				__( 'Drop Shadow Box', 'dropshadowboxes' ),
+				esc_html__( 'Drop Shadow Box', 'drop-shadow-boxes' ),
 				array( 'classname' => 'dropshadowboxes_widget', 'description' => $description ),
 				array( 'width' => 200, 'height' => 250, 'id_base' => 'dropshadowboxes_widget' )
 			);
@@ -88,7 +88,7 @@ if(!class_exists("DropShadowBoxesWidget")){
 		function form( $instance ) {
 		
 			$instance = wp_parse_args( (array) $instance, array(
-				'title' => __("Title", "drop-shadow-boxes"),
+				'title' => esc_html__("Title", "drop-shadow-boxes"),
 				'align' => 'none',
 				'width_number' => '100',
 				'height_number' => 'auto',
@@ -100,7 +100,7 @@ if(!class_exists("DropShadowBoxesWidget")){
 				'inside_shadow' => '1',
 				'outside_shadow' => '1',
 				'effect' => 'lifted-both',
-				'box_content' =>  __("Enter your content here.", "drop-shadow-boxes")
+				'box_content' =>  esc_html__("Enter your content here.", "drop-shadow-boxes")
 						
 				) );
 			$border_color = $instance['border_color'];
